@@ -27,6 +27,6 @@ const _counterReducer = createReducer(
   }),
 );
 
-export function counterReducer(state: IState, action: Action) {
+export function counterReducer(state: IState | undefined, action: Action) {
   return _counterReducer(state, action);
 }

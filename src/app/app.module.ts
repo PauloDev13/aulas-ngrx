@@ -9,7 +9,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CounterButtonComponent } from './component/counter-button/counter-button.component';
 import { CounterDisplayComponent } from './component/counter-display/counter-display.component';
+import { CounterComponent } from './component/counter/counter.component';
 import { CustomCounterComponent } from './component/custom-counter/custom-counter.component';
+import { HomeComponent } from './component/home/home.component';
+import { MenuToolbarComponent } from './component/menu-toolbar/menu-toolbar.component';
 import { AppMaterialModule } from './shared/app-material/app-material.module';
 import { counterReducer } from './shared/store/counter.reducer';
 
@@ -19,6 +22,9 @@ import { counterReducer } from './shared/store/counter.reducer';
     CounterButtonComponent,
     CounterDisplayComponent,
     CustomCounterComponent,
+    MenuToolbarComponent,
+    CounterComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

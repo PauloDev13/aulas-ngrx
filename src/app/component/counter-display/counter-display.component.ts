@@ -1,36 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { IState } from '../../shared/store/counter.model';
+import { selectorCounter } from '../../shared/store/counter.selector';
 
 @Component({
   selector: 'app-counter-display',
   templateUrl: './counter-display.component.html',
   styleUrls: ['./counter-display.component.css'],
 })
-export class CounterDisplayComponent implements OnInit {
+export class CounterDisplayComponent implements OnInit, OnDestroy {
   counterDisplay!: number;
-  channelName = '';
-  counter$!: Observable<IState>;
+  counterSubscription$: Subscription = new Subscription();
 
-  // counterSubscription$: Subscription = new Subscription();
+  private readonly store: Store = inject(Store<{ counter: IState }>);
 
-  constructor(private store: Store<{ counter: IState }>) {}
+  // constructor(private store: Store<{ counter: IState }>) {}
 
   ngOnInit(): void {
-    this.counter$ = this.store.select('counter');
-    // this.counterSubscription$ = this.store.select('counter').subscribe({
-    //   next: data => {
-    //     this.counterDisplay = data.counter;
-    //     this.channelName = data.channelName;
-    //   },
-    // });
+    this.counterSubscription$ = this.store.select(selectorCounter).subscribe({
+      next: data => {
+        this.counterDisplay = data;
+      },
+    });
   }
 
-  // ngOnDestroy(): void {
-  // if (this.counterSubscription$) {
-  //   this.counterSubscription$.unsubscribe();
-  // }
-  // }
+  ngOnDestroy(): void {
+    if (this.counterSubscription$) {
+      this.counterSubscription$.unsubscribe();
+    }
+  }
 }

@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import {
+  changeChannelName,
   decrement,
   increment,
   reset,
 } from '../../shared/store/counter.actions';
-import { IState } from '../../shared/store/counter.state';
+import { IState } from '../../shared/store/counter.model';
 
 @Component({
   selector: 'app-counter-button',
@@ -26,5 +27,11 @@ export class CounterButtonComponent {
 
   onReset() {
     this.store.dispatch(reset());
+  }
+
+  onRename() {
+    this.store.dispatch(
+      changeChannelName({ channel: 'Bem vindo ao Mimos.Feltro' }),
+    );
   }
 }

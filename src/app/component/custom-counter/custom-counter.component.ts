@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { customIncrement } from '../../shared/store/counter.actions';
-import { IState } from '../../shared/store/counter.state';
+import { IState } from '../../shared/store/counter.model';
 
 @Component({
   selector: 'app-custom-counter',

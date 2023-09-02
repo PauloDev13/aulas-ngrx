@@ -1,1 +1,2 @@
-<h2>Counter: <b>{{counter}}</b></h2>
+<h1>{{(counter$ | async)?.channelName}}</h1>
+<h2>Counter: <b>{{(counter$ | async)?.counter}}</b></h2>

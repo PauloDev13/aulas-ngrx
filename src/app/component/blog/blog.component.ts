@@ -2,7 +2,10 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 
-import { BlogsListModel } from '../../shared/store/blog/blog.model';
+import {
+  BlogsListModel,
+  DialogParam,
+} from '../../shared/store/blog/blog.model';
 import { selectorBlogs } from '../../shared/store/blog/blog.selector';
 import { AppStateModel } from '../../shared/store/global/app-state.model';
 import { AddBlogComponent } from './add-blog/add-blog.component';
@@ -26,12 +29,19 @@ export class BlogComponent implements OnInit {
   }
 
   onAddBlog() {
-    this.onOpenDialog();
+    this.onOpenDialog({ id: 0, title: 'Add Blog', isEdit: false });
   }
 
-  onOpenDialog() {
+  onEditBlog(id: number | null) {
+    if (id !== null) {
+      this.onOpenDialog({ id, title: 'Edit Blog', isEdit: true });
+    }
+  }
+
+  onOpenDialog(params: DialogParam) {
     this.dialog.open(AddBlogComponent, {
       width: '40%',
+      data: params,
     });
   }
 }

@@ -1,5 +1,8 @@
 <h1 style="text-align: center">Technology Blogs</h1>
-<mat-card *ngFor="let blog of blogs">
+<div style="text-align: center">
+  <button (click)="onAddBlog()" color="primary" mat-raised-button>Add Blog</button>
+</div>
+<mat-card *ngFor="let blog of blogs.blogList">
   <mat-card-header>
     <h1>{{blog.title}}</h1>
   </mat-card-header>

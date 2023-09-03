@@ -1,6 +1,11 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
-import { addBlog, loadBlogs, removeBlog, updateBlog } from './blog.actions';
+import {
+  addBlog,
+  loadBlogSuccess,
+  removeBlog,
+  updateBlog,
+} from './blog.actions';
 import {
   BlogActionAddModel,
   BlogsListModel,
@@ -10,9 +15,16 @@ import { blogState } from './blog.state';
 
 const _blogReducer = createReducer(
   blogState,
-  on(loadBlogs, (state: BlogsListModel) => {
+  // on(loadBlogs, (state: BlogsListModel) => {
+  //   return {
+  //     ...state,
+  //   };
+  // }),
+
+  on(loadBlogSuccess, (state: BlogsListModel, action: BlogsListModel) => {
     return {
       ...state,
+      blogList: [...action.blogList],
     };
   }),
 

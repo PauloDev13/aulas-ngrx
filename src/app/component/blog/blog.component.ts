@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 
-import { removeBlog } from '../../shared/store/blog/blog.actions';
+import { loadBlogs, removeBlog } from '../../shared/store/blog/blog.actions';
 import {
   BlogsListModel,
   DialogParam,
@@ -22,6 +22,7 @@ export class BlogComponent implements OnInit {
   private readonly dialog = inject(MatDialog);
 
   ngOnInit(): void {
+    this.store.dispatch(loadBlogs());
     this.store.select(selectorBlogs).subscribe({
       next: value => {
         this.blogs.blogList = value;

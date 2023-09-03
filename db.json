@@ -1,0 +1,24 @@
+{
+  "blogs": [
+    {
+      "id": 1,
+      "title": "Angular 16",
+      "description": "Course Angular to hero"
+    },
+    {
+      "id": 2,
+      "title": "Reactive",
+      "description": "Course Reactive to hero"
+    },
+    {
+      "id": 3,
+      "title": "Spring Boot",
+      "description": "Course Spring to hero"
+    },
+    {
+      "id": 4,
+      "title": "Node JS",
+      "description": "Course Node JS to hero"
+    }
+  ]
+}

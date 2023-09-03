@@ -1,7 +1,9 @@
+import { HttpClientModule } from '@angular/common/http';
 import { isDevMode, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -16,6 +18,7 @@ import { CustomCounterComponent } from './component/custom-counter/custom-counte
 import { HomeComponent } from './component/home/home.component';
 import { MenuToolbarComponent } from './component/menu-toolbar/menu-toolbar.component';
 import { AppMaterialModule } from './shared/app-material/app-material.module';
+import { BlogEffects } from './shared/store/blog/blog.effects';
 import { AppState } from './shared/store/global/app.state';
 
 @NgModule({
@@ -34,11 +37,13 @@ import { AppState } from './shared/store/global/app.state';
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(AppState),
+    EffectsModule.forRoot([BlogEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     AppMaterialModule,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [],
   bootstrap: [AppComponent],

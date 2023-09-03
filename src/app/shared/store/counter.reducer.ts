@@ -7,7 +7,7 @@ import {
   increment,
   reset,
 } from './counter.actions';
-import { IState } from './counter.model';
+import { CounterModel } from './counter.model';
 import { initialState } from './counter.state';
 
 const _counterReducer = createReducer(
@@ -51,6 +51,9 @@ const _counterReducer = createReducer(
   }),
 );
 
-export function counterReducer(state: IState | undefined, action: Action) {
+export function counterReducer(
+  state: CounterModel | undefined,
+  action: Action,
+) {
   return _counterReducer(state, action);
 }

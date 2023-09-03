@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
 import { customIncrement } from '../../shared/store/counter.actions';
-import { IState } from '../../shared/store/counter.model';
+import { CounterModel } from '../../shared/store/counter.model';
 import { selectorChannelName } from '../../shared/store/counter.selector';
 
 @Component({
@@ -19,7 +19,7 @@ export class CustomCounterComponent implements OnInit, OnDestroy {
 
   // constructor(private store: Store<{ counter: IState }>) {}
 
-  private readonly store: Store = inject(Store<{ counter: IState }>);
+  private readonly store: Store = inject(Store<{ counter: CounterModel }>);
 
   onCustomCounter() {
     this.store.dispatch(

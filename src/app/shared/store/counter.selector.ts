@@ -1,19 +1,19 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { IState } from './counter.model';
+import { CounterModel } from './counter.model';
 
-const getCounterState = createFeatureSelector<IState>('counter');
+const getCounterState = createFeatureSelector<CounterModel>('counter');
 
 export const selectorCounter = createSelector(
   getCounterState,
-  (state: IState) => {
+  (state: CounterModel) => {
     return state.counter;
   },
 );
 
 export const selectorChannelName = createSelector(
   getCounterState,
-  (state: IState) => {
+  (state: CounterModel) => {
     return state.channelName;
   },
 );

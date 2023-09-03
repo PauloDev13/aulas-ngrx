@@ -7,6 +7,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BlogComponent } from './component/blog/blog.component';
 import { CounterButtonComponent } from './component/counter-button/counter-button.component';
 import { CounterDisplayComponent } from './component/counter-display/counter-display.component';
 import { CounterComponent } from './component/counter/counter.component';
@@ -14,7 +15,7 @@ import { CustomCounterComponent } from './component/custom-counter/custom-counte
 import { HomeComponent } from './component/home/home.component';
 import { MenuToolbarComponent } from './component/menu-toolbar/menu-toolbar.component';
 import { AppMaterialModule } from './shared/app-material/app-material.module';
-import { counterReducer } from './shared/store/counter.reducer';
+import { AppState } from './shared/store/global/app.state';
 
 @NgModule({
   declarations: [
@@ -25,11 +26,12 @@ import { counterReducer } from './shared/store/counter.reducer';
     MenuToolbarComponent,
     CounterComponent,
     HomeComponent,
+    BlogComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({ counter: counterReducer }),
+    StoreModule.forRoot(AppState),
     BrowserAnimationsModule,
     FormsModule,
     AppMaterialModule,

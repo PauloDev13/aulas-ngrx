@@ -1,6 +1,6 @@
-import { IState } from './counter.model';
+import { CounterModel } from './counter.model';
 
-export const initialState: IState = {
+export const initialState: CounterModel = {
   counter: 0,
   channelName: 'mimos.feltro',
 };

@@ -2,8 +2,8 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
-import { IState } from '../../shared/store/counter.model';
 import { selectorCounter } from '../../shared/store/counter.selector';
+import { AppStateModel } from '../../shared/store/global/app-state.model';
 
 @Component({
   selector: 'app-counter-display',
@@ -14,7 +14,7 @@ export class CounterDisplayComponent implements OnInit, OnDestroy {
   counterDisplay!: number;
   counterSubscription$: Subscription = new Subscription();
 
-  private readonly store: Store = inject(Store<{ counter: IState }>);
+  private readonly store: Store = inject(Store<AppStateModel>);
 
   // constructor(private store: Store<{ counter: IState }>) {}
 

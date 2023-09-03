@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 
+import { removeBlog } from '../../shared/store/blog/blog.actions';
 import {
   BlogsListModel,
   DialogParam,
@@ -35,6 +36,15 @@ export class BlogComponent implements OnInit {
   onEditBlog(id: number | null) {
     if (id !== null) {
       this.onOpenDialog({ id, title: 'Edit Blog', isEdit: true });
+    }
+  }
+
+  onRemoveBlog(id: number | null) {
+    if (id !== null) {
+      if (confirm('Remover Blog com ID: ' + id + '?')) {
+        this.store.dispatch(removeBlog({ id: id }));
+      }
+      alert('Blogo com ID: ' + id + ' removido');
     }
   }
 

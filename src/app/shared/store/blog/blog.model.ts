@@ -6,6 +6,7 @@ export interface BlogModel {
 
 export interface BlogsListModel {
   blogList: BlogModel[];
+  message: string;
 }
 
 export interface BlogActionAddModel {

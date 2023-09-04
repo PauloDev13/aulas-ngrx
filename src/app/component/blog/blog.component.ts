@@ -7,7 +7,7 @@ import {
   BlogsListModel,
   DialogParam,
 } from '../../shared/store/blog/blog.model';
-import { selectorBlogs } from '../../shared/store/blog/blog.selector';
+import { selectorBlogsInfo } from '../../shared/store/blog/blog.selector';
 import { AppStateModel } from '../../shared/store/global/app-state.model';
 import { AddBlogComponent } from './add-blog/add-blog.component';
 
@@ -17,15 +17,15 @@ import { AddBlogComponent } from './add-blog/add-blog.component';
   styleUrls: ['./blog.component.css'],
 })
 export class BlogComponent implements OnInit {
-  blogs: BlogsListModel = { blogList: [] };
+  blogs: BlogsListModel = { blogList: [], message: '' };
   private readonly store: Store = inject(Store<AppStateModel>);
   private readonly dialog = inject(MatDialog);
 
   ngOnInit(): void {
     this.store.dispatch(loadBlogs());
-    this.store.select(selectorBlogs).subscribe({
+    this.store.select(selectorBlogsInfo).subscribe({
       next: value => {
-        this.blogs.blogList = value;
+        this.blogs = value;
       },
     });
   }

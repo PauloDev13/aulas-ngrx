@@ -15,7 +15,7 @@ export const loadBlogSuccess = createAction(
 );
 export const loadBlogError = createAction(
   LOAD_BLOG_ERROR,
-  props<{ message: string }>(),
+  props<BlogsListModel>(),
 );
 
 export const addBlog = createAction('addBlog', props<BlogActionAddModel>());

@@ -1,16 +1,33 @@
-<h1 style="text-align: center">Technology Blogs</h1>
-<div style="text-align: center">
-  <button (click)="onAddBlog()" color="primary" mat-raised-button>Add Blog</button>
-</div>
-<mat-card *ngFor="let blog of blogs.blogList">
-  <mat-card-header>
-    <h1>{{blog.title}}</h1>
-    <div style="text-align: right; width: 100%;">
-      <button (click)="onEditBlog(blog.id)" color="primary" mat-raised-button>Edit</button>
-      <button (click)="onRemoveBlog(blog.id)" color="warn" mat-raised-button>Remove</button>
-    </div>
-  </mat-card-header>
-  <mat-card-content>
-    <p>{{blog.description}}</p>
-  </mat-card-content>
-</mat-card>
+<ng-container *ngIf="!blogs.message; else errorMessage">
+  <h1 style="text-align: center">Technology Blogs</h1>
+  <div style="text-align: center">
+    <button (click)="onAddBlog()" color="primary" mat-raised-button>Add Blog</button>
+  </div>
+
+  <mat-card *ngIf="!blogs.blogList.length">
+    <mat-card-header>
+      <h1>Blogs not found!</h1>
+    </mat-card-header>
+  </mat-card>
+
+  <mat-card *ngFor="let blog of blogs.blogList">
+    <mat-card-header>
+      <h1>{{blog.title}}</h1>
+      <div style="text-align: right; width: 100%;">
+        <button (click)="onEditBlog(blog.id)" color="primary" mat-raised-button>Edit</button>
+        <button (click)="onRemoveBlog(blog.id)" color="warn" mat-raised-button>Remove</button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{blog.description}}</p>
+    </mat-card-content>
+  </mat-card>
+</ng-container>
+
+<ng-template #errorMessage>
+  <mat-card>
+    <mat-card-header><h1>Error Ocurred</h1></mat-card-header>
+    <mat-card-content><p class="p-red">{{blogs.message}}</p></mat-card-content>
+  </mat-card>
+</ng-template>
+

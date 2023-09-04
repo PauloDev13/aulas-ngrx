@@ -14,9 +14,11 @@ export class BlogEffects {
       exhaustMap(() => {
         return this.masterService.loadBlogs().pipe(
           map(data => {
-            return loadBlogSuccess({ blogList: data });
+            return loadBlogSuccess({ blogList: data, message: '' });
           }),
-          catchError(error => of(loadBlogError({ message: error.message }))),
+          catchError(error =>
+            of(loadBlogError({ blogList: [], message: error.message })),
+          ),
         );
       }),
     );

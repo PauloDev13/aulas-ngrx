@@ -11,6 +11,7 @@ export interface BlogsListModel {
 
 export interface BlogActionAddModel {
   blogInput: BlogModel;
+  message: string;
 }
 
 export interface DialogParam {
@@ -20,3 +21,9 @@ export interface DialogParam {
 }
 
 export type BlogsListType = BlogsListModel | undefined;
+
+export const emptyBlog: BlogModel = {
+  id: null,
+  title: '',
+  description: '',
+};

@@ -2,10 +2,15 @@ import { createAction, props } from '@ngrx/store';
 
 import { BlogActionAddModel, BlogsListModel } from './blog.model';
 
-// Declaration constants for actions
+// Declaration constants for actions load
 export const LOAD_BLOGS = '[blog page] load blogs';
 export const LOAD_BLOG_SUCCESS = '[blog page] load blog success';
 export const LOAD_BLOG_ERROR = '[blog page] load blog error';
+
+// Declaration constants for actions create
+export const CREATE_BLOG = '[blog page] create blog';
+export const CREATE_BLOG_SUCCESS = '[blog page] create blog success';
+export const CREATE_BLOG_ERROR = '[blog page] create blog error';
 
 // Actions loading blogs
 export const loadBlogs = createAction(LOAD_BLOGS);
@@ -18,7 +23,21 @@ export const loadBlogError = createAction(
   props<BlogsListModel>(),
 );
 
-export const addBlog = createAction('addBlog', props<BlogActionAddModel>());
+// Actions creating blogs
+export const createBlog = createAction(
+  CREATE_BLOG,
+  props<BlogActionAddModel>(),
+);
+
+export const createBlogSuccess = createAction(
+  CREATE_BLOG_SUCCESS,
+  props<BlogActionAddModel>(),
+);
+
+export const createBlogError = createAction(
+  CREATE_BLOG_ERROR,
+  props<BlogActionAddModel>(),
+);
 
 export const updateBlog = createAction(
   'updateBlog',

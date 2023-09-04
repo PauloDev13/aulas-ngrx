@@ -3,7 +3,10 @@ import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 
-import { addBlog, updateBlog } from '../../../shared/store/blog/blog.actions';
+import {
+  createBlog,
+  updateBlog,
+} from '../../../shared/store/blog/blog.actions';
 import { BlogModel, DialogParam } from '../../../shared/store/blog/blog.model';
 import { selectorBlogId } from '../../../shared/store/blog/blog.selector';
 import { AppStateModel } from '../../../shared/store/global/app-state.model';
@@ -54,9 +57,9 @@ export class AddBlogComponent implements OnInit {
 
       if (this.data.isEdit) {
         _blogInput.id = this.data.id;
-        this.store.dispatch(updateBlog({ blogInput: _blogInput }));
+        this.store.dispatch(updateBlog({ blogInput: _blogInput, message: '' }));
       } else {
-        this.store.dispatch(addBlog({ blogInput: _blogInput }));
+        this.store.dispatch(createBlog({ blogInput: _blogInput, message: '' }));
       }
 
       this.onCloseDialog();

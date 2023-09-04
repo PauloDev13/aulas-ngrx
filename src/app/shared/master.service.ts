@@ -14,4 +14,9 @@ export class MasterService {
   loadBlogs(): Observable<BlogModel[]> {
     return this.httpClient.get<BlogModel[]>(`${this.baseUrl}/blogs`);
   }
+
+  createBlog(blogInput: BlogModel): Observable<BlogModel> {
+    console.log(blogInput);
+    return this.httpClient.post<BlogModel>(`${this.baseUrl}/blogs`, blogInput);
+  }
 }

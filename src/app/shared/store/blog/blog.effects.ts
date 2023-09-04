@@ -1,16 +1,27 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of } from 'rxjs';
 
 import { MasterService } from '../../master.service';
-import { LOAD_BLOGS, loadBlogError, loadBlogSuccess } from './blog.actions';
+import {
+  createBlog,
+  createBlogError,
+  createBlogSuccess,
+  loadBlogError,
+  loadBlogs,
+  loadBlogSuccess,
+} from './blog.actions';
+import { BlogActionAddModel, emptyBlog } from './blog.model';
 
 @Injectable()
 export class BlogEffects {
-  // Effects
+  readonly actions$: Actions = inject(Actions);
+  readonly masterService: MasterService = inject(MasterService);
+
+  // Effects loading blogs
   _blogs = createEffect(() => {
     return this.actions$.pipe(
-      ofType(LOAD_BLOGS),
+      ofType(loadBlogs),
       exhaustMap(() => {
         return this.masterService.loadBlogs().pipe(
           map(data => {
@@ -24,11 +35,25 @@ export class BlogEffects {
     );
   });
 
-  // readonly actions$: Actions = inject(Actions);
-  // readonly masterService: MasterService = inject(MasterService);
-
-  constructor(
-    private actions$: Actions,
-    private masterService: MasterService,
-  ) {}
+  // Effects create blogs
+  _create = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(createBlog),
+      exhaustMap((action: BlogActionAddModel) => {
+        return this.masterService.createBlog(action.blogInput).pipe(
+          map(data => {
+            return createBlogSuccess({ blogInput: data, message: '' });
+          }),
+          catchError(error =>
+            of(
+              createBlogError({
+                blogInput: emptyBlog,
+                message: error.message,
+              }),
+            ),
+          ),
+        );
+      }),
+    );
+  });
 }

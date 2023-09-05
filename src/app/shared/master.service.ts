@@ -16,7 +16,18 @@ export class MasterService {
   }
 
   createBlog(blogInput: BlogModel): Observable<BlogModel> {
-    console.log(blogInput);
     return this.httpClient.post<BlogModel>(`${this.baseUrl}/blogs`, blogInput);
+  }
+
+  updateBlog(blogInput: BlogModel): Observable<BlogModel> {
+    console.log(blogInput);
+    return this.httpClient.put<BlogModel>(
+      `${this.baseUrl}/blogs/${blogInput.id}`,
+      blogInput,
+    );
+  }
+
+  removeBlog(id: number | null): Observable<BlogModel> {
+    return this.httpClient.delete<BlogModel>(`${this.baseUrl}/blogs/${id}`);
   }
 }

@@ -2,7 +2,7 @@
   "blogs": [
     {
       "id": 1,
-      "title": "Angular",
+      "title": "Angular1",
       "description": "Course Angular to hero"
     },
     {
@@ -13,7 +13,7 @@
     {
       "id": 3,
       "title": "Spring",
-      "description": "Course Spring to hero"
+      "description": "Course Spring basic to hero"
     },
     {
       "id": 4,

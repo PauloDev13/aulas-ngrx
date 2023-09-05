@@ -10,6 +10,11 @@ import {
   loadBlogError,
   loadBlogs,
   loadBlogSuccess,
+  removeBlog,
+  removeBlogSuccess,
+  updateBlog,
+  updateBlogError,
+  updateBlogSuccess,
 } from './blog.actions';
 import { BlogActionAddModel, emptyBlog } from './blog.model';
 
@@ -47,6 +52,55 @@ export class BlogEffects {
           catchError(error =>
             of(
               createBlogError({
+                blogInput: emptyBlog,
+                message: error.message,
+              }),
+            ),
+          ),
+        );
+      }),
+    );
+  });
+
+  // Effects update blogs
+  _update = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(updateBlog),
+      exhaustMap((action: BlogActionAddModel) => {
+        return this.masterService.updateBlog(action.blogInput).pipe(
+          map(() => {
+            return updateBlogSuccess({
+              blogInput: action.blogInput,
+              message: '',
+            });
+          }),
+          catchError(error =>
+            of(
+              updateBlogError({
+                blogInput: emptyBlog,
+                message: error.message,
+              }),
+            ),
+          ),
+        );
+      }),
+    );
+  });
+
+  // Effects remove blogs
+  _remove = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(removeBlog),
+      exhaustMap((action: { id: number }) => {
+        return this.masterService.removeBlog(action.id).pipe(
+          map(() => {
+            return removeBlogSuccess({
+              id: action.id,
+            });
+          }),
+          catchError(error =>
+            of(
+              updateBlogError({
                 blogInput: emptyBlog,
                 message: error.message,
               }),

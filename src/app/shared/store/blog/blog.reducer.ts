@@ -9,6 +9,7 @@ import {
 } from './blog.actions';
 import {
   BlogActionAddModel,
+  BlogModel,
   BlogsListModel,
   BlogsListType,
 } from './blog.model';
@@ -41,13 +42,13 @@ const _blogReducer = createReducer(
   }),
 
   on(updateBlog, (state: BlogsListModel, action: BlogActionAddModel) => {
-    const _blog = { ...action.blogInput };
-    const updatedBlog = state.blogList.map(blog => {
-      return _blog.id === blog.id ? _blog : blog;
+    const updatedBlog = state.blogList.map((blog: BlogModel) => {
+      return blog.id === action.blogInput.id ? action.blogInput : blog;
     });
     return {
       ...state,
       blogList: updatedBlog,
+      message: '',
     };
   }),
 

@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of, switchMap } from 'rxjs';
 
 import { MasterService } from '../../master.service';
-import { showAlert } from '../global/app.actions';
+import { loadSpinner, showAlert } from '../global/app.actions';
 import {
   CREATE_BLOG,
   createBlogSuccess,
@@ -31,7 +31,12 @@ export class BlogEffects {
           map((data: BlogModel[]) => {
             return loadBlogSuccess({ blogList: data });
           }),
-          catchError(error => of(loadBlogError({ message: error.message }))),
+          catchError(error =>
+            of(
+              loadBlogError({ message: error.message }),
+              loadSpinner({ isLoaded: false }),
+            ),
+          ),
         );
       }),
     );
@@ -46,6 +51,7 @@ export class BlogEffects {
           switchMap((data: BlogModel) =>
             of(
               createBlogSuccess({ blogInput: data }),
+              loadSpinner({ isLoaded: false }),
               showAlert({
                 message: 'Blog created successfully',
                 actionResult: 'pass',
@@ -58,6 +64,7 @@ export class BlogEffects {
                 message: `Create blog failed ${error.message}`,
                 actionResult: 'fail',
               }),
+              loadSpinner({ isLoaded: false }),
             ),
           ),
         ),
@@ -76,6 +83,7 @@ export class BlogEffects {
               updateBlogSuccess({
                 blogInput: action.blogInput,
               }),
+              loadSpinner({ isLoaded: false }),
               showAlert({
                 message: 'Blog updated successfully',
                 actionResult: 'pass',
@@ -88,6 +96,7 @@ export class BlogEffects {
                 message: `Update blog failed ${error.message}`,
                 actionResult: 'fail',
               }),
+              loadSpinner({ isLoaded: false }),
             ),
           ),
         );
@@ -106,6 +115,7 @@ export class BlogEffects {
               removeBlogSuccess({
                 id: action.id,
               }),
+              loadSpinner({ isLoaded: false }),
               showAlert({
                 message: 'Blog removed successfully',
                 actionResult: 'pass',
@@ -118,6 +128,7 @@ export class BlogEffects {
                 message: `Remove blog failed ${error.message}`,
                 actionResult: 'fail',
               }),
+              loadSpinner({ isLoaded: false }),
             ),
           ),
         );

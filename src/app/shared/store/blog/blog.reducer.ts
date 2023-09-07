@@ -16,6 +16,7 @@ const _blogReducer = createReducer(
   on(loadBlogs, (state: BlogsListModel) => {
     return {
       ...state,
+      // isLoaded: false,
     };
   }),
 
@@ -26,6 +27,7 @@ const _blogReducer = createReducer(
         ...state,
         blogList: [...action.blogList],
         message: '',
+        // isLoaded: false,
       };
     },
   ),
@@ -35,6 +37,7 @@ const _blogReducer = createReducer(
       ...state,
       blogList: [],
       message: action.message,
+      // isLoaded: false,
     };
   }),
 
@@ -45,6 +48,7 @@ const _blogReducer = createReducer(
       return {
         ...state,
         blogList: [...state.blogList, newBlog],
+        // isLoaded: false,
       };
     },
   ),
@@ -59,6 +63,7 @@ const _blogReducer = createReducer(
       return {
         ...state,
         blogList: updatedBlog,
+        // isLoaded: false,
       };
     },
   ),
@@ -70,6 +75,7 @@ const _blogReducer = createReducer(
     return {
       ...state,
       blogList: updatedBlog,
+      // isLoaded: false,
     };
   }),
 );

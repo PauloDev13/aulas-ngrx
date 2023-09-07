@@ -21,7 +21,7 @@ export class AppEffects {
     ),
   );
 
-  showSnackbarAlert(message: string, actionResult: string) {
+  private showSnackbarAlert(message: string, actionResult: string) {
     const _classSnackbar =
       actionResult === 'pass' ? 'green-snackbar' : 'red-snackbar';
     return this.snackBar.open(message, 'OK', {

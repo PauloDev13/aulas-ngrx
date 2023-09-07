@@ -10,6 +10,7 @@ import {
 import { BlogModel, DialogParam } from '../../../shared/store/blog/blog.model';
 import { selectorBlogId } from '../../../shared/store/blog/blog.selector';
 import { AppStateModel } from '../../../shared/store/global/app-state.model';
+import { loadSpinner } from '../../../shared/store/global/app.actions';
 
 @Component({
   selector: 'app-add-blog',
@@ -55,12 +56,16 @@ export class AddBlogComponent implements OnInit {
         description: this.blogForm.value.description,
       };
 
-      if (this.data.isEdit) {
-        _blogInput.id = this.data.id;
-        this.store.dispatch(updateBlog({ blogInput: _blogInput }));
-      } else {
-        this.store.dispatch(createBlog({ blogInput: _blogInput }));
-      }
+      this.store.dispatch(loadSpinner({ isLoaded: true }));
+
+      setTimeout(() => {
+        if (this.data.isEdit) {
+          _blogInput.id = this.data.id;
+          this.store.dispatch(updateBlog({ blogInput: _blogInput }));
+        } else {
+          this.store.dispatch(createBlog({ blogInput: _blogInput }));
+        }
+      }, 1000);
 
       this.onCloseDialog();
     }

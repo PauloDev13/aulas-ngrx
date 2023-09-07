@@ -9,6 +9,7 @@ import {
 } from '../../shared/store/blog/blog.model';
 import { selectorBlogsInfo } from '../../shared/store/blog/blog.selector';
 import { AppStateModel } from '../../shared/store/global/app-state.model';
+import { loadSpinner } from '../../shared/store/global/app.actions';
 import { AddBlogComponent } from './add-blog/add-blog.component';
 
 @Component({
@@ -22,7 +23,13 @@ export class BlogComponent implements OnInit {
   private readonly dialog = inject(MatDialog);
 
   ngOnInit(): void {
-    this.store.dispatch(loadBlogs());
+    this.store.dispatch(loadSpinner({ isLoaded: true }));
+
+    setTimeout(() => {
+      this.store.dispatch(loadBlogs());
+      this.store.dispatch(loadSpinner({ isLoaded: false }));
+    }, 1000);
+
     this.store.select(selectorBlogsInfo).subscribe({
       next: (data: BlogsListModel) => {
         this.blogList = data;
@@ -43,7 +50,11 @@ export class BlogComponent implements OnInit {
   onRemoveBlog(id: number | null) {
     if (id !== null) {
       if (confirm('Remover Blog com ID: ' + id + '?')) {
-        this.store.dispatch(removeBlog({ id: id }));
+        this.store.dispatch(loadSpinner({ isLoaded: true }));
+
+        setTimeout(() => {
+          this.store.dispatch(removeBlog({ id: id }));
+        }, 1000);
       }
     }
   }

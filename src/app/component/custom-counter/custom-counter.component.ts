@@ -16,9 +16,6 @@ export class CustomCounterComponent implements OnInit, OnDestroy {
   actionType = 'add';
   channelName = '';
   counterSubscription$: Subscription = new Subscription();
-
-  // constructor(private store: Store<{ counter: IState }>) {}
-
   private readonly store: Store = inject(Store<{ counter: CounterModel }>);
 
   onCustomCounter() {

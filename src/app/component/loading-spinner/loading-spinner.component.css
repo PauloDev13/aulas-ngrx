@@ -1,0 +1,21 @@
+.spinner-content {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 1000;
+  display: flex;
+  text-align: center;
+}
+
+.spinner-class {
+  position: fixed;
+  width: 100%;
+  left: 50%;
+  right: 0;
+  top: 50%;
+  bottom: 0;
+}

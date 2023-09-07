@@ -7,6 +7,7 @@ export interface BlogModel {
 export interface BlogsListModel {
   blogList: BlogModel[];
   message: string;
+  // isLoaded: boolean;
 }
 
 // export interface BlogActionAddModel {

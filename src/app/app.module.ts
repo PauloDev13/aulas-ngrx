@@ -16,11 +16,12 @@ import { CounterDisplayComponent } from './component/counter-display/counter-dis
 import { CounterComponent } from './component/counter/counter.component';
 import { CustomCounterComponent } from './component/custom-counter/custom-counter.component';
 import { HomeComponent } from './component/home/home.component';
+import { LoadingSpinnerComponent } from './component/loading-spinner/loading-spinner.component';
 import { MenuToolbarComponent } from './component/menu-toolbar/menu-toolbar.component';
 import { AppMaterialModule } from './shared/app-material/app-material.module';
 import { BlogEffects } from './shared/store/blog/blog.effects';
 import { AppEffects } from './shared/store/global/app.effects';
-import { AppState } from './shared/store/global/app.state';
+import { AppStore } from './shared/store/global/app.store';
 
 @NgModule({
   declarations: [
@@ -33,11 +34,12 @@ import { AppState } from './shared/store/global/app.state';
     HomeComponent,
     BlogComponent,
     AddBlogComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot(AppState),
+    StoreModule.forRoot(AppStore),
     EffectsModule.forRoot([BlogEffects, AppEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     BrowserAnimationsModule,

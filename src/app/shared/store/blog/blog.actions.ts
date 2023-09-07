@@ -21,7 +21,6 @@ export const REMOVE_BLOG_SUCCESS = '[blog page] remove blog success';
 
 // Actions loading blogs
 export const loadBlogs = createAction(LOAD_BLOG);
-
 export const loadBlogSuccess = createAction(
   LOAD_BLOG_SUCCESS,
   props<{ blogList: BlogModel[] }>(),
@@ -36,7 +35,6 @@ export const createBlog = createAction(
   CREATE_BLOG,
   props<{ blogInput: BlogModel }>(),
 );
-
 export const createBlogSuccess = createAction(
   CREATE_BLOG_SUCCESS,
   props<{ blogInput: BlogModel }>(),
@@ -47,7 +45,6 @@ export const updateBlog = createAction(
   UPDATE_BLOG,
   props<{ blogInput: BlogModel }>(),
 );
-
 export const updateBlogSuccess = createAction(
   CREATE_BLOG_SUCCESS,
   props<{ blogInput: BlogModel }>(),
@@ -55,7 +52,6 @@ export const updateBlogSuccess = createAction(
 
 // Actions deleting blogs
 export const removeBlog = createAction(REMOVE_BLOG, props<{ id: number }>());
-
 export const removeBlogSuccess = createAction(
   REMOVE_BLOG_SUCCESS,
   props<{ id: number }>(),

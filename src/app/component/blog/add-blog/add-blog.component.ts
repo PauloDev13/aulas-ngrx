@@ -57,9 +57,9 @@ export class AddBlogComponent implements OnInit {
 
       if (this.data.isEdit) {
         _blogInput.id = this.data.id;
-        this.store.dispatch(updateBlog({ blogInput: _blogInput, message: '' }));
+        this.store.dispatch(updateBlog({ blogInput: _blogInput }));
       } else {
-        this.store.dispatch(createBlog({ blogInput: _blogInput, message: '' }));
+        this.store.dispatch(createBlog({ blogInput: _blogInput }));
       }
 
       this.onCloseDialog();

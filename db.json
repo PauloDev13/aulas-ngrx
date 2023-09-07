@@ -2,23 +2,8 @@
   "blogs": [
     {
       "id": 1,
-      "title": "Angular1",
-      "description": "Course Angular to hero"
-    },
-    {
-      "id": 2,
-      "title": "Reactive",
-      "description": "Course Reactive to hero"
-    },
-    {
-      "id": 3,
-      "title": "Spring",
-      "description": "Course Spring basic to hero"
-    },
-    {
-      "id": 4,
-      "title": "NodeJS",
-      "description": "Course Node JS to hero"
+      "title": "Angular",
+      "description": "Curso Angular 16 basic"
     }
   ]
 }

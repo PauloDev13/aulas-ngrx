@@ -1,33 +1,38 @@
-<ng-container *ngIf="!blogs.message; else errorMessage">
-  <h1 style="text-align: center">Technology Blogs</h1>
-  <div style="text-align: center">
+<div style="text-align: center;">
+  <h1>Technology Blogs</h1>
+  <div *ngIf="!blogList.message">
+
     <button (click)="onAddBlog()" color="primary" mat-raised-button>Add Blog</button>
+
+    <mat-card *ngIf="!blogList.blogList.length">
+      <h1>No Blog found</h1>
+    </mat-card>
+
+    <mat-card *ngFor="let item of blogList.blogList">
+      <mat-card-header>
+        <h1>{{item.title}}</h1>
+        <div style="text-align: right;width: 100%;">
+          <button (click)="onEditBlog(item.id)" color="primary" mat-raised-button>
+            <mat-icon fontIcon="edit"></mat-icon>
+          </button>
+          <button (click)="onRemoveBlog(item.id)" color="accent" mat-raised-button>
+            <mat-icon fontIcon="delete"></mat-icon>
+          </button>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{item.description}}</p>
+      </mat-card-content>
+    </mat-card>
   </div>
 
-  <mat-card *ngIf="!blogs.blogList.length">
+  <mat-card *ngIf="blogList.message">
     <mat-card-header>
-      <h1>Blogs not found!</h1>
-    </mat-card-header>
-  </mat-card>
-
-  <mat-card *ngFor="let blog of blogs.blogList">
-    <mat-card-header>
-      <h1>{{blog.title}}</h1>
-      <div style="text-align: right; width: 100%;">
-        <button (click)="onEditBlog(blog.id)" color="primary" mat-raised-button>Edit</button>
-        <button (click)="onRemoveBlog(blog.id)" color="warn" mat-raised-button>Remove</button>
-      </div>
+      <h1>Error Occured</h1>
     </mat-card-header>
     <mat-card-content>
-      <p>{{blog.description}}</p>
+      <p style="color: red;">{{blogList.message}}</p>
     </mat-card-content>
   </mat-card>
-</ng-container>
-
-<ng-template #errorMessage>
-  <mat-card>
-    <mat-card-header><h1>Error Ocurred</h1></mat-card-header>
-    <mat-card-content><p class="p-red">{{blogs.message}}</p></mat-card-content>
-  </mat-card>
-</ng-template>
+</div>
 

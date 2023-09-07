@@ -19,6 +19,7 @@ import { HomeComponent } from './component/home/home.component';
 import { MenuToolbarComponent } from './component/menu-toolbar/menu-toolbar.component';
 import { AppMaterialModule } from './shared/app-material/app-material.module';
 import { BlogEffects } from './shared/store/blog/blog.effects';
+import { AppEffects } from './shared/store/global/app.effects';
 import { AppState } from './shared/store/global/app.state';
 
 @NgModule({
@@ -37,7 +38,7 @@ import { AppState } from './shared/store/global/app.state';
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(AppState),
-    EffectsModule.forRoot([BlogEffects]),
+    EffectsModule.forRoot([BlogEffects, AppEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     BrowserAnimationsModule,
     FormsModule,

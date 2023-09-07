@@ -3,29 +3,34 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {
   createBlogSuccess,
   loadBlogError,
+  loadBlogs,
   loadBlogSuccess,
-  removeBlog,
-  updateBlog,
+  removeBlogSuccess,
+  updateBlogSuccess,
 } from './blog.actions';
-import {
-  BlogActionAddModel,
-  BlogModel,
-  BlogsListModel,
-  BlogsListType,
-} from './blog.model';
+import { BlogModel, BlogsListModel, BlogsListType } from './blog.model';
 import { blogState } from './blog.state';
 
 const _blogReducer = createReducer(
   blogState,
-  on(loadBlogSuccess, (state: BlogsListModel, action: BlogsListModel) => {
+  on(loadBlogs, (state: BlogsListModel) => {
     return {
       ...state,
-      blogList: [...action.blogList],
-      message: '',
     };
   }),
 
-  on(loadBlogError, (state: BlogsListModel, action: BlogsListModel) => {
+  on(
+    loadBlogSuccess,
+    (state: BlogsListModel, action: { blogList: BlogModel[] }) => {
+      return {
+        ...state,
+        blogList: [...action.blogList],
+        message: '',
+      };
+    },
+  ),
+
+  on(loadBlogError, (state: BlogsListModel, action: { message: string }) => {
     return {
       ...state,
       blogList: [],
@@ -33,27 +38,33 @@ const _blogReducer = createReducer(
     };
   }),
 
-  on(createBlogSuccess, (state: BlogsListModel, action: BlogActionAddModel) => {
-    const _blog = { ...action.blogInput };
-    return {
-      ...state,
-      blogList: [...state.blogList, _blog],
-    };
-  }),
+  on(
+    createBlogSuccess,
+    (state: BlogsListModel, action: { blogInput: BlogModel }) => {
+      const newBlog = { ...action.blogInput };
+      return {
+        ...state,
+        blogList: [...state.blogList, newBlog],
+      };
+    },
+  ),
 
-  on(updateBlog, (state: BlogsListModel, action: BlogActionAddModel) => {
-    const updatedBlog = state.blogList.map((blog: BlogModel) => {
-      return blog.id === action.blogInput.id ? action.blogInput : blog;
-    });
-    return {
-      ...state,
-      blogList: updatedBlog,
-      message: '',
-    };
-  }),
+  on(
+    updateBlogSuccess,
+    (state: BlogsListModel, action: { blogInput: BlogModel }) => {
+      const _blogUpdated = { ...action.blogInput };
+      const updatedBlog = state.blogList.map((blog: BlogModel) => {
+        return _blogUpdated.id === blog.id ? _blogUpdated : blog;
+      });
+      return {
+        ...state,
+        blogList: updatedBlog,
+      };
+    },
+  ),
 
-  on(removeBlog, (state: BlogsListModel, action: { id: number }) => {
-    const updatedBlog = state.blogList.filter(blog => {
+  on(removeBlogSuccess, (state: BlogsListModel, action: { id: number }) => {
+    const updatedBlog = state.blogList.filter((blog: BlogModel) => {
       return blog.id !== action.id;
     });
     return {

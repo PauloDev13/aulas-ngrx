@@ -20,7 +20,6 @@ export class MasterService {
   }
 
   updateBlog(blogInput: BlogModel): Observable<BlogModel> {
-    console.log(blogInput);
     return this.httpClient.put<BlogModel>(
       `${this.baseUrl}/blogs/${blogInput.id}`,
       blogInput,

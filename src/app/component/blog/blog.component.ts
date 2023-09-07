@@ -17,15 +17,15 @@ import { AddBlogComponent } from './add-blog/add-blog.component';
   styleUrls: ['./blog.component.css'],
 })
 export class BlogComponent implements OnInit {
-  blogs: BlogsListModel = { blogList: [], message: '' };
+  blogList!: BlogsListModel;
   private readonly store: Store = inject(Store<AppStateModel>);
   private readonly dialog = inject(MatDialog);
 
   ngOnInit(): void {
     this.store.dispatch(loadBlogs());
     this.store.select(selectorBlogsInfo).subscribe({
-      next: value => {
-        this.blogs = value;
+      next: (data: BlogsListModel) => {
+        this.blogList = data;
       },
     });
   }
@@ -45,7 +45,6 @@ export class BlogComponent implements OnInit {
       if (confirm('Remover Blog com ID: ' + id + '?')) {
         this.store.dispatch(removeBlog({ id: id }));
       }
-      alert('Blogo com ID: ' + id + ' removido');
     }
   }
 

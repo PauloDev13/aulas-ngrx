@@ -9,10 +9,9 @@ export interface BlogsListModel {
   message: string;
 }
 
-export interface BlogActionAddModel {
-  blogInput: BlogModel;
-  message: string;
-}
+// export interface BlogActionAddModel {
+//   blogInput: BlogModel;
+// }
 
 export interface DialogParam {
   id: number | null;
@@ -22,8 +21,8 @@ export interface DialogParam {
 
 export type BlogsListType = BlogsListModel | undefined;
 
-export const emptyBlog: BlogModel = {
-  id: null,
-  title: '',
-  description: '',
-};
+// export const emptyBlog: BlogModel = {
+//   id: null,
+//   title: '',
+//   description: '',
+// };

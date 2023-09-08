@@ -13,19 +13,23 @@ import { blogState } from './blog.state';
 
 const _blogReducer = createReducer(
   blogState,
-  on(loadBlogs, (state: BlogsListModel) => {
-    return {
-      ...state,
-      // isLoaded: false,
-    };
-  }),
+  on(loadBlogs, (state: BlogsListModel) => ({
+    ...state,
+  })),
+
+  // on(loadBlogs, (state: BlogsListModel) => {
+  //   return {
+  //     ...state,
+  //     // isLoaded: false,
+  //   };
+  // }),
 
   on(
     loadBlogSuccess,
     (state: BlogsListModel, action: { blogList: BlogModel[] }) => {
       return {
         ...state,
-        blogList: [...action.blogList],
+        blogList: action.blogList,
         message: '',
         // isLoaded: false,
       };
@@ -69,12 +73,12 @@ const _blogReducer = createReducer(
   ),
 
   on(removeBlogSuccess, (state: BlogsListModel, action: { id: number }) => {
-    const updatedBlog = state.blogList.filter((blog: BlogModel) => {
+    const blogList = state.blogList.filter((blog: BlogModel) => {
       return blog.id !== action.id;
     });
     return {
       ...state,
-      blogList: updatedBlog,
+      blogList,
       // isLoaded: false,
     };
   }),
